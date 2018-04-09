@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Meta etiquetas requeridas -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Bloque de estilo personalizado para algunas partes -->
+    <style>
+    .row.content {height: 700px}
+    
+    .sidenav {
+      background-color: #555;
+      height: 100%;
+      text-align: center;
+    }
+
+    .img-fluid{
+      background-color: #555;
+      color: #555;
+    }
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    nav {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    .navUp{
+      margin-right: 0px;
+      margin-left: 0px;
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+    /* Para pantallas pequeñas */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+
+  <!-- Script para el cambio de página -->
+  <script language="javascript"> 
+    function inicio(pagina){ 
+      window.location.href=pagina; 
+    } 
+  </script>
+  
+  <!-- Titulo de la pagina -->
+  <title>Práctica DAW</title>
+</head>
+
+<body>
+    <!-- Barra de Navegacion superior -->
+  <nav>
+    <ul class="navUp">
+      <h2 lang="es">Aplicación Ciclismo <span id="tipoLider"></h2>
+    </ul>
+  </nav>
+
+  <!-- Seccion con la columna izquierda y el cuerpo de la pagina -->
+    <section class="container-fluid">
+    <!-- Columna izquierda -->
+    <div class="row content">
+
+      <!-- Jumbotron para el acceso a las páginas-->
+      <div class="col-sm-12 sidenav">
+        <br>
+        <div class="jumbotron">
+          <h1 class="display-4" lang="es" >Tour de Francia / Bicicletas Públicas</h1>
+          <p class="lead" lang="es">Aplicación que muestra información histórica del Tour de Francia e información de la situación actual de las bicicletas públicas del mundo.</p>
+          <hr class="my-4">
+          <br>
+          <p class="lead">
+            <div class="row">
+              <div class="col-md-6 ">
+                  <img role="button" class="img-fluid img-profile rounded-circle mx-auto mb-2 btn-dark" id="imgProf" src="imagenes/tour.png" alt="" onclick="inicio('tour.html');" >
+              </div>
+              <div class="col-md-6">
+                  <img role="button" class="img-fluid img-profile rounded-circle mx-auto mb-2 btn-dark" id="imgProf" src="imagenes/bicicleta.png" alt="" onclick="inicio('bicicleta.html');">
+              </div>
+          </div>
+      </div>
+          </p>
+        </div>
+        
+    </div>
+  </section>
+ 
+  <!-- Pie de pagina -->
+  <footer class="container-fluid">
+    <span >Práctica Diseño de Aplicaciones Web. José Manuel Lucas Rodríguez</span>
+  </footer>
+
+  </body>
+</html>

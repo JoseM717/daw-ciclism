@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Meta etiquetas requeridas -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS Chart-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+    <!-- JSON con los datos de ciclismo -->
+    <script type="text/javascript" src="JSONCiclism.js"></script>
+
+    <!-- Bloque de estilo personalizado para algunas partes -->
+    <style>
+    .row.content {height: 800px}
+    
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+      text-align: center;
+    }
+
+    .img-fluid{
+      background-color: #555;
+      color: #555;
+    }
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    nav {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    .navUp{
+      margin-right: 0px;
+      margin-left: 0px;
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+    /* Para pantallas pequeñas */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+
+  <!-- Script para el cambio de página -->
+  <script language="javascript"> 
+    function inicio(pagina){ 
+      window.location.href=pagina; 
+    } 
+  </script>
+
+  <!-- Titulo de la pagina -->
+  <title>Tour de Francia</title>
+</head>
+
+<body onload="cargarDatosLider(0)">
+
+  <!-- Barra de Navegacion superior -->
+  <nav>
+    <ul class="navUp">
+      <h2>Podium <span id="tipoLider"></span> año: <span id="anio"></span></h2>
+    </ul>
+  </nav>
+
+  <!-- Seccion con la columna izquierda y el cuerpo de la pagina -->
+  <section class="container-fluid">
+    <!-- Columna izquierda -->
+    <div class="row content">
+      <div class="col-sm-3 sidenav">
+        <br>
+        <h2><span id="campoLider"></span></h2>
+        <span class="d-none d-lg-block">
+            <img class="img-fluid img-profile rounded-circle mx-auto mb-2" id="imgProf" src="imagenes/lider.png" alt="">
+        </span>
+        <br>
+        <select id='select' class="form-control" onChange='cargarDatosLider(select.options[select.selectedIndex].value)'>
+          <script language="JavaScript">   
+            var year = 2017
+            for (var i=0; i <= 52; i++){
+              year--;
+              document.write("<option value="+i+">" + year + "</option>");
+            }
+          </script> 
+        </select>
+      </div>
+      <!-- ##################################################################### -->
+
+      <!-- Cuerpo de la pagina con los datos-->
+      <div class="col-sm-9">
+        <h3>
+          <span role="button" class="btn btn-warning" id="btnLider">Líder  </span>
+          <span role="button" class="btn btn-secondary" id="btnJoven">Joven  </span>
+          <span role="button" class="btn btn-danger" id="btnMontana">Montaña</span>
+          <span role="button" class="btn btn-success" id="btnPuntos">Puntos </span>
+          <span role="button" class="btn btn-light" onclick="inicio('index.html');">Volver</span>
+        </h3>
+        <hr>
+        
+        <div id="divValores">
+          <h5>
+            Primero: <span class="label-primary" id="primero"></span>
+            <br> 
+            Segundo: <span class="label-primary" id="segundo"></span>
+            <br> 
+            Tercero: <span class="label-primary" id="tercero"></span>
+          </h5><br>
+
+          Distancia:
+          <span id="distancia"></span><br>
+          Velocidad media: 
+          <span id="velocidadMedia"></span><br>
+          Distancia más larga: 
+          <span id="distanciaLarga"></span><br>
+          Tiempo en contrarreloj: 
+          <span id="contrarreloj"></span><br>
+          <br>
+        </div>
+
+
+        <!-- Grafica de datos -->
+        <div id="graph-container" >
+          <canvas id="myChart"></canvas><br>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+   
+
+  <!-- Pie de pagina -->
+  <footer class="container-fluid">
+    <button class="btn btn-light"><a class="nav-link" id="lider"><span id="referencia"></span></a></button>
+  </footer>
+
+  <!-- Script JQuery para modificar el comportamiento de los botones y se carguen los datos -->
+  <script type="text/javascript">
+    $("#btnLider").click(function(){
+            $('#divValores').show();
+            $('#myChart').remove();
+            $('#graph-container').append('<canvas id="myChart"><canvas>');
+            $("#imgProf").attr("src","imagenes/lider.png");
+            $("#select").attr("onChange","cargarDatosLider(select.options[select.selectedIndex].value)");
+            cargarDatosLider(document.getElementById("select").options[document.getElementById("select").selectedIndex].value);
+    });
+
+    $("#btnMontana").click(function(){
+            $('#divValores').show();
+            $('#myChart').remove();
+            $('#graph-container').append('<canvas id="myChart"><canvas>');
+            $("#imgProf").attr("src","imagenes/montana.png");
+            $("#select").attr("onChange","cargarDatosMontana(select.options[select.selectedIndex].value)");
+            cargarDatosMontana(document.getElementById("select").options[document.getElementById("select").selectedIndex].value);
+    });
+
+    $("#btnPuntos").click(function(){
+            $('#divValores').show();
+            $('#myChart').remove();
+            $('#graph-container').append('<canvas id="myChart"><canvas>');
+            $("#imgProf").attr("src","imagenes/puntos.png");
+            $("#select").attr("onChange","cargarDatosPuntos(select.options[select.selectedIndex].value)");
+            cargarDatosPuntos(document.getElementById("select").options[document.getElementById("select").selectedIndex].value);
+    });
+
+    $("#btnJoven").click(function(){
+
+            $('#divValores').show();
+            $('#myChart').remove();
+            $('#graph-container').append('<canvas id="myChart"><canvas>');
+            $("#imgProf").attr("src","imagenes/joven.png");
+            $("#select").attr("onChange","cargarDatosJoven(select.options[select.selectedIndex].value)");
+            cargarDatosJoven(document.getElementById("select").options[document.getElementById("select").selectedIndex].value);
+            
+    });
+
+  </script>
+
+</body>
+</html>
