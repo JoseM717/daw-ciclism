@@ -151,7 +151,7 @@
           $(this).html('<img src="http://www.bba-reman.com/images/fbloader.gif" />');
           
           $.ajax({
-            url: "http://api.citybik.es/v2/networks",
+            url: "https://api.citybik.es/v2/networks",
             dataType: 'json',
             success: function(data){
                   for(var i in data.networks) {
@@ -177,7 +177,7 @@
       /* Peticion AJAX para recibir el JSON con la información de la estación seleccionada */
       function requestPoint(network_id){
           $.ajax({
-            url: "http://api.citybik.es/v2/networks/"+network_id,
+            url: "https://api.citybik.es/v2/networks/"+network_id,
             dataType: 'json',
             success: function(data){
                 var div = document.getElementById('carter');
